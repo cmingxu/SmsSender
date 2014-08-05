@@ -1,5 +1,9 @@
 package com.example.smssender.app;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -35,7 +39,16 @@ public class Message {
         return recepents;
     }
 
-    public void sendMessage(){
+    public void sendMessage(Context context){
+        Intent intentt = new Intent(Intent.ACTION_VIEW);
+        intentt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        intentt.setData(Uri.parse("sms:"));
+        intentt.setType("vnd.android-dir/mms-sms");
+        intentt.putExtra(Intent.EXTRA_TEXT, this.message_content);
+
+        intentt.putExtra("address",  this.recepents);
+        context.startActivity(intentt);
 //        send sms
 //        update status
     }

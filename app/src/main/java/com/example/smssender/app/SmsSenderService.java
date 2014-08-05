@@ -40,7 +40,7 @@ public class SmsSenderService extends Service {
                 while(true) {
                     Log.d(LOG_TAG, "Worker working");
                     for(Message m : messageMediator.getMessages()){
-                        m.sendMessage();
+                        m.sendMessage(SmsSenderService.this);
                         Log.d(LOG_TAG, m.getMessage_content());
                     }
                     Thread.sleep(SLEEP_INTERVAL);
